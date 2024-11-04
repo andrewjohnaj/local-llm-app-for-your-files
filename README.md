@@ -1,10 +1,28 @@
-# PDF Querying with Large Language Models (LLMs)
-A Python-based project that leverages Large Language Models (LLMs) to extract, process, and query information from PDF documents. This tool is designed to enable natural language querying of PDFs, making it easier to gather insights and analyze content efficiently.
+# PDF Querying Chatbot with Falcon LLMs
 
-## Features
-Natural Language Querying: Query PDF documents using natural language, powered by LLMs.
-Multi-Document Support: Process and analyze multiple PDFs.
-Content Summarization: Summarize PDF content based on user-defined queries.
-Customizable Preprocessing: Includes options for handling various PDF structures.
+This project builds a customizable, private PDF chatbot that uses **Falcon-7B** and **Falcon-40B** Large Language Models (LLMs) to answer queries on PDF content. Unlike other implementations, this bot provides end-to-end control over preprocessing, ranking, and retrieval of results, ensuring that your data remains private and that you have flexibility over each step of the bot's operations.
+
+## Key Features
+
+- **End-to-End Control**: Configure each aspect of the chatbot, from text extraction to model parameters and search tuning.
+- **Natural Language Querying**: Seamlessly query PDF documents using natural language, with responses tuned to be helpful, accurate, and contextually aware.
+- **Privacy-Focused Processing**: No third-party services are required for handling PDFs; data remains private and is processed locally.
+- **Dual-Model Support**: Provides options for **Falcon-7B** and **Falcon-40B** models, allowing different levels of response sophistication.
+- **Advanced Search and Ranking**: Combines semantic and cross-encoder search techniques to deliver the most relevant results from PDF content.
 
 ## Tech Stack
+
+- **Programming Language**: Python 3.8+
+- **LLMs**: Falcon-7B and Falcon-40B, hosted via custom `Client` endpoints.
+- **PDF Processing**: `pdfminer` for robust PDF text extraction.
+- **Semantic Search and Ranking**: `sentence-transformers` and `CrossEncoder` models from Hugging Face for semantic search and relevance scoring.
+
+## Getting Started
+
+### Prerequisites
+
+1. Install Python 3.8 or higher.
+2. Set up a virtual environment:
+   ```bash
+   python3 -m venv env
+   source env/bin/activate  # On Windows use `env\Scripts\activate`
