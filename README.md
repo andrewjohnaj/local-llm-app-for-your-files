@@ -1,28 +1,61 @@
-# PDF Querying Chatbot with Falcon LLMs
+# Local LLM Webapp for Your Files
 
-This project builds a customizable, private PDF chatbot that uses **Falcon-7B** and **Falcon-40B** Large Language Models (LLMs) to answer queries on PDF content. Unlike other implementations, this bot provides end-to-end control over preprocessing, ranking, and retrieval of results, ensuring that your data remains private and that you have flexibility over each step of the bot's operations.
+> Chat with your own files using open-source Large Language Models!
 
-## Key Features
+## Introduction
 
-- **End-to-End Control**: Configure each aspect of the chatbot, from text extraction to model parameters and search tuning.
-- **Natural Language Querying**: Seamlessly query PDF documents using natural language, with responses tuned to be helpful, accurate, and contextually aware.
-- **Privacy-Focused Processing**: No third-party services are required for handling PDFs; data remains private and is processed locally.
-- **Dual-Model Support**: Provides options for **Falcon-7B** and **Falcon-40B** models, allowing different levels of response sophistication.
-- **Advanced Search and Ranking**: Combines semantic and cross-encoder search techniques to deliver the most relevant results from PDF content.
+This project provides a local web application that allows you to interact with your own files using the power of open-source Large Language Models (LLMs).  It leverages Langchain for document processing and chain management, Hugging Face models for embeddings, and Streamlit for a user-friendly interface.  This means your data stays local, and you don't need to rely on external APIs for processing.
 
-## Tech Stack
+## How It Works
 
-- **Programming Language**: Python 3.8+
-- **LLMs**: Falcon-7B and Falcon-40B, hosted via custom `Client` endpoints.
-- **PDF Processing**: `pdfminer` for robust PDF text extraction.
-- **Semantic Search and Ranking**: `sentence-transformers` and `CrossEncoder` models from Hugging Face for semantic search and relevance scoring.
+The application processes your files (currently supports text files, but can be extended) in the following manner:
 
-## Getting Started
+1. **File Upload:** You upload your files through the Streamlit interface.
 
-### Prerequisites
+2. **Text Extraction:** The application extracts the text content from the uploaded files.  Future versions will support various file formats.
 
-1. Install Python 3.8 or higher.
-2. Set up a virtual environment:
+3. **Text Chunking:**  The extracted text is broken down into smaller, manageable chunks. This is crucial for handling large documents and optimizing LLM performance.
+
+4. **Embedding Generation:** Hugging Face models are used to create vector embeddings for each text chunk. These embeddings capture the semantic meaning of the text.
+
+5. **Local LLM Interaction:** When you ask a question, the application calculates the embedding of your query. It then compares this query embedding to the embeddings of the text chunks to find the most relevant ones.
+
+6. **Contextual Response:** The most relevant chunks, along with your question, are passed to a locally running open-source LLM. The LLM generates a response based on the provided context.
+
+## Dependencies and Installation
+
+1. **Clone the Repository:**
    ```bash
-   python3 -m venv env
-   source env/bin/activate  # On Windows use `env\Scripts\activate`
+   git clone https://github.com/andrewjohnaj/local-llm-app-for-your-files.git
+   ```
+
+2. **Create a Virtual Environment (Recommended):**
+   ```bash
+   python3 -m venv venv  # Create a virtual environment
+   source venv/bin/activate  # Activate the environment (Linux/macOS)
+   venv\Scripts\activate  # Activate the environment (Windows)
+   ```
+
+3. **Install Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Usage
+
+1. **Run the Streamlit App:**
+   streamlit run app.py
+
+2. **Access the Web App:** The application will launch in your web browser.
+
+3. **Upload Files:** Use the file upload feature to add the files you want to chat with.
+
+4. **Ask Questions:**  Type your questions in the chat interface and the LLM will generate responses based on the content of your uploaded files.
+
+## Contributing
+
+Contributions are welcome! Please open issues and pull requests for bug fixes, feature additions, or improvements.
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
